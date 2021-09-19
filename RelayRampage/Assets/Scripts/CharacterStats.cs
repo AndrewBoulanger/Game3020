@@ -7,15 +7,17 @@ public enum classType
 {
     knight, blackMage, whitemage, thief
 }
-public class PartyCharacter : MonoBehaviour
+public class CharacterStats : MonoBehaviour
 {
     classType typeId;
     int health;
     int maxHealth;
     int strength;
     int defence;
-    int speed;
+    int speed = 10;
     float weight;
+
+    public int Speed {get { return speed; } }
 
     // Start is called before the first frame update
     void Start()
