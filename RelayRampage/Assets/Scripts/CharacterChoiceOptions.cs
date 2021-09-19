@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class CharacterChoiceOptions : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class CharacterChoiceOptions : MonoBehaviour
     Sprite off_Frame;
     [SerializeField]
     Sprite on_Frame;
+    [SerializeField]
+    TextMeshProUGUI[] stats;
 
     int classTypes = 4;
     int selectIndex = 0;
@@ -21,16 +24,18 @@ public class CharacterChoiceOptions : MonoBehaviour
     {
         if(context.started)
         { 
-        frames[selectIndex].sprite = off_Frame;
+            frames[selectIndex].sprite = off_Frame;
+            stats[selectIndex].enabled = false;
 
-        //move index to a new frame in the array, clamp within allowable values
-        selectIndex = (context.ReadValue<Vector2>().x > 0) ? selectIndex + 1 : selectIndex -1;
-        if(selectIndex > classTypes-1)
-            selectIndex = classTypes-1;
-        if(selectIndex < 0)
-            selectIndex = 0;
+            //move index to a new frame in the array, clamp within allowable values
+             selectIndex = (context.ReadValue<Vector2>().x > 0) ? selectIndex + 1 : selectIndex -1;
+            if(selectIndex > classTypes-1)
+                selectIndex = classTypes-1;
+             if(selectIndex < 0)
+                selectIndex = 0;
 
-        frames[selectIndex].sprite = on_Frame;
+            frames[selectIndex].sprite = on_Frame;
+            stats[selectIndex].enabled = true;
         }
     }
 
