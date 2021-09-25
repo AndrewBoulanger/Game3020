@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.SceneManagement;
+
 
 public class CharacterChoiceOptions : MonoBehaviour
 {
@@ -15,10 +17,30 @@ public class CharacterChoiceOptions : MonoBehaviour
     Sprite on_Frame;
     [SerializeField]
     TextMeshProUGUI[] stats;
+    [SerializeField]
+    ObjectPool[] characterOptions;
 
-    int classTypes = 4;
+    [SerializeField]
+    Transform[] chosenSlots;
+    GameObject[] chosenCharacters;
+
+
+    const int classTypes = 4;
     int selectIndex = 0;
+    const int OpenSlots = 3;
+    int chosenIndex = 0;
 
+    public ConfirmWindowDelegate confirmDelegate;
+
+    [SerializeField]
+    ConfirmWindow confirmWindow;
+
+    private void Start()
+    {
+        chosenCharacters = new GameObject[3];
+
+        confirmDelegate = ConfirmParty;
+    }
 
     public void ChangeIndex(InputAction.CallbackContext context)
     {
@@ -39,13 +61,63 @@ public class CharacterChoiceOptions : MonoBehaviour
         }
     }
 
-    public void Enter()
+    /// <summary>
+    /// /select a character and add it to the chosenCharacters list from the corresponding object pool
+    /// if three characters have been chosen enable a window to confirm character choices
+    /// </summary>
+    //
+    public void Enter(InputAction.CallbackContext context)
     {
-        Debug.Log("enter");
-        
+        if(context.started)
+        {
+            GameObject character = characterOptions[selectIndex].GetPooledObject();
+            if (character != null)
+            {
+                chosenCharacters[chosenIndex] = character;
+                chosenCharacters[chosenIndex].SetActive(true);
+                chosenCharacters[chosenIndex].transform.position = chosenSlots[chosenIndex].transform.position;
+                chosenIndex++;
+
+                if (chosenIndex >= OpenSlots && confirmWindow != null)
+                {
+                    GetComponent<PlayerInput>().enabled = false;
+                  
+                    confirmWindow.gameObject.SetActive(true);
+                    confirmWindow.EnableWindow(gameObject, confirmDelegate);
+                }
+            }
+            else
+                Debug.Log("pool did not return valid character");
+        }
     }
+    public void Back(InputAction.CallbackContext context)
+    {
+        if(context.started)
+            Back();
+    }
+
+    public void ConfirmParty( bool confirmed)
+    {
+        if(confirmed)
+        {
+            Debug.Log("party Confirmed");
+
+            SceneManager.LoadScene("BattleScene");
+        }
+        else
+            Back();
+    }
+
     public void Back()
     {
-        Debug.Log("back");
+        if (chosenIndex <= 0)
+            return;
+
+        chosenIndex--;
+        chosenCharacters[chosenIndex].SetActive(false);
+        chosenCharacters[chosenIndex] = null;
+
+       GetComponent<PlayerInput>().enabled = true;;
     }
+
 }

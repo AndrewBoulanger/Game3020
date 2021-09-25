@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum classType
 {
-    knight, blackMage, whitemage, thief
+    knight, mage, cleric, thief
 }
 public class CharacterStats : MonoBehaviour
 {
@@ -16,6 +16,7 @@ public class CharacterStats : MonoBehaviour
     int defence;
     int speed = 10;
     float weight;
+
 
     public int Speed {get { return speed; } }
 
