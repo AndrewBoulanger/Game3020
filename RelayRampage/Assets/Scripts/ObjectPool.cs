@@ -22,6 +22,12 @@ public class ObjectPool : MonoBehaviour
         {
             temp = Instantiate(objectToPool);
             temp.SetActive(false);
+
+            //it works out better is pooled objects don't start with gravity
+            Rigidbody rb = temp.GetComponent<Rigidbody>();
+            if(rb != null)
+                rb.useGravity = false;
+
             poolObjects.Add(temp);
         }
 

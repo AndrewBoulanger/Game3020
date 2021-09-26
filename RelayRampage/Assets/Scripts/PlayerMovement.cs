@@ -12,12 +12,13 @@ public class PlayerMovement : MonoBehaviour
 
     int moveSpeed;
     Vector2 dir;
+
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<CharacterStats>();
-        moveSpeed = stats.Speed;
+        moveSpeed = stats.Speed /10;
         
     }
 
@@ -30,17 +31,16 @@ public class PlayerMovement : MonoBehaviour
 
     public void setVelocity(InputAction.CallbackContext inputs)
     {
-        
         dir = inputs.ReadValue<Vector2>();
-
+        print(dir);
+        if (dir.x > 0)
+            transform.rotation = Quaternion.Euler(Vector3.up * 90);
+        else if (dir.x < 0)
+            transform.rotation = Quaternion.Euler(Vector3.down * 90);
+       
     }
-
-    public void Enable()
+    private void OnDisable()
     {
-        moveSpeed = stats.Speed;
-    }
-    public void Disable()
-    {
-        
+        dir = Vector2.zero;
     }
 }

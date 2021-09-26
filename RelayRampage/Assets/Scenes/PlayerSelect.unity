@@ -249,6 +249,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -263386234753857453, guid: d4ccc432f03e0cc4a9a217ad54675722, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 624045188267349043, guid: d4ccc432f03e0cc4a9a217ad54675722, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -296,6 +300,14 @@ PrefabInstance:
     - target: {fileID: 624045188267349044, guid: d4ccc432f03e0cc4a9a217ad54675722, type: 3}
       propertyPath: m_Name
       value: Character_01 (armorHeavy)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7681813043769658182, guid: d4ccc432f03e0cc4a9a217ad54675722, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937983889198630359, guid: d4ccc432f03e0cc4a9a217ad54675722, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4ccc432f03e0cc4a9a217ad54675722, type: 3}
@@ -2509,6 +2521,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1376879105204133929, guid: b826d8e69f1c81349914c8ed67a85812, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5554951856900891501, guid: b826d8e69f1c81349914c8ed67a85812, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7386960221649131038, guid: b826d8e69f1c81349914c8ed67a85812, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7640283889950647742, guid: b826d8e69f1c81349914c8ed67a85812, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7802674021760102272, guid: b826d8e69f1c81349914c8ed67a85812, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -2824,6 +2852,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1323855861412270656, guid: a26944d7a69153c40b8dd2efe9aaf93f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7590811891839613942, guid: a26944d7a69153c40b8dd2efe9aaf93f, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -2871,6 +2903,14 @@ PrefabInstance:
     - target: {fileID: 7590811891839613943, guid: a26944d7a69153c40b8dd2efe9aaf93f, type: 3}
       propertyPath: m_Name
       value: Character_02 (armor)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781533016868293954, guid: a26944d7a69153c40b8dd2efe9aaf93f, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8797588456154786492, guid: a26944d7a69153c40b8dd2efe9aaf93f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a26944d7a69153c40b8dd2efe9aaf93f, type: 3}
@@ -3196,6 +3236,10 @@ PrefabInstance:
     - target: {fileID: 3503244211293840529, guid: 6c4c907b58eff9340b59109287b18822, type: 3}
       propertyPath: m_Name
       value: Character_03 (wizard)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8403559153398436467, guid: 6c4c907b58eff9340b59109287b18822, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c4c907b58eff9340b59109287b18822, type: 3}

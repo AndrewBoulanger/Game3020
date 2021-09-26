@@ -45,7 +45,6 @@ public class ConfirmWindow : MonoBehaviour
             SetWorldPause(true);
         Toggle();
         GetComponent<PlayerInput>().actions.Enable();
-        Debug.Log(GetComponent<PlayerInput>().actions.controlSchemes);
     }
 
     /// <summary>
