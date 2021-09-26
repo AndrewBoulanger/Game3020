@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 
 public class CharacterChoiceOptions : MonoBehaviour
@@ -76,6 +77,7 @@ public class CharacterChoiceOptions : MonoBehaviour
                 chosenCharacters[chosenIndex] = character;
                 chosenCharacters[chosenIndex].SetActive(true);
                 chosenCharacters[chosenIndex].transform.position = chosenSlots[chosenIndex].transform.position;
+                 chosenCharacters[chosenIndex].transform.rotation = chosenSlots[chosenIndex].transform.rotation;
                 chosenIndex++;
 
                 if (chosenIndex >= OpenSlots && confirmWindow != null)
@@ -100,8 +102,12 @@ public class CharacterChoiceOptions : MonoBehaviour
     {
         if(confirmed)
         {
-            Debug.Log("party Confirmed");
-
+           using (StreamWriter sw = new StreamWriter(Application.dataPath + Path.DirectorySeparatorChar + "PartySaveData.txt"))
+            foreach(GameObject partyMember in chosenCharacters)
+            {
+              partyMember.GetComponent<CharacterStats>().saveData(sw);
+            }
+           
             SceneManager.LoadScene("BattleScene");
         }
         else

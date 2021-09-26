@@ -47,6 +47,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7802674021760102272}
+  - component: {fileID: 710571617}
   m_Layer: 0
   m_Name: cleric
   m_TagString: Untagged
@@ -70,6 +71,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &710571617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7802674021760102275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0972f6b4f932ed42969211f3850441e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeId: 2
+  maxHealth: 80
+  strength: 10
+  magic: 100
+  defence: 90
+  speed: 60
+  weight: 50
 --- !u!1001 &7802674021447442529
 PrefabInstance:
   m_ObjectHideFlags: 0

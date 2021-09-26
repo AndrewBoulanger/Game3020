@@ -47,6 +47,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 624045188267349043}
+  - component: {fileID: 1371884775}
   m_Layer: 0
   m_Name: knight
   m_TagString: Untagged
@@ -70,6 +71,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1371884775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 624045188267349044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0972f6b4f932ed42969211f3850441e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeId: 0
+  maxHealth: 120
+  strength: 80
+  magic: 0
+  defence: 110
+  speed: 50
+  weight: 100
 --- !u!1001 &624045186757530887
 PrefabInstance:
   m_ObjectHideFlags: 0

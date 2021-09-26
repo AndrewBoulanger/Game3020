@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3503244211293840528}
+  - component: {fileID: 1035225108}
   m_Layer: 0
   m_Name: Mage
   m_TagString: Untagged
@@ -32,6 +33,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1035225108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3503244211293840529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0972f6b4f932ed42969211f3850441e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeId: 1
+  maxHealth: 60
+  strength: 40
+  magic: 110
+  defence: 70
+  speed: 70
+  weight: 65
 --- !u!95 &3503244212758889418
 Animator:
   serializedVersion: 3
