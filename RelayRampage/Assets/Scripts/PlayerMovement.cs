@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
 {
     Rigidbody rigidbody ;
     CharacterStats stats;
+    InputAction.CallbackContext context;
 
     int moveSpeed;
     Vector2 dir;
@@ -38,7 +39,13 @@ public class PlayerMovement : MonoBehaviour
         else if (dir.x < 0)
             transform.rotation = Quaternion.Euler(Vector3.down * 90);
        
+        context = inputs;
     }
+    private void OnEnable()
+    {
+        dir = context.ReadValue<Vector2>();
+    }
+
     private void OnDisable()
     {
         dir = Vector2.zero;
