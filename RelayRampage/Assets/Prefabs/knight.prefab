@@ -52,7 +52,6 @@ GameObject:
   - component: {fileID: -263386234753857453}
   - component: {fileID: 7681813043769658182}
   - component: {fileID: -7891634547446949385}
-  - component: {fileID: 8640679541004297534}
   - component: {fileID: 8146023687656799153}
   m_Layer: 6
   m_Name: knight
@@ -151,25 +150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22c19e63d9373d5419f1415221778345, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &8640679541004297534
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 624045188267349044}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 844657385f130b04ab8a7991ac40261a, type: 3}
-  m_Controller: {fileID: 9100000, guid: dea8c6730bb1dc44ca209e13b61170ba, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &8146023687656799153
 MonoBehaviour:
   m_ObjectHideFlags: 0

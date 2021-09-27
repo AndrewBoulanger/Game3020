@@ -6,14 +6,22 @@ using UnityEngine.InputSystem;
 public delegate void TurnOverDelegate(bool isDead);
 public abstract class PlayerAttackBehaviour : MonoBehaviour
 {
+    protected AnimationReceiver anim;
     public TurnOverDelegate OnTurnEnd;
     bool isDead = false;
+    const float avgSpeed = 65f;
+
+    protected CharacterStats stats;
+    protected float attackSpeed;
 
     TurnIndicatorEffects turnIndicatorCylinder;
     // Start is called before the first frame update
     void Awake()
     {
        turnIndicatorCylinder = GetComponentInChildren<TurnIndicatorEffects>();
+        anim = GetComponent<AnimationReceiver>();
+        stats = GetComponent<CharacterStats>();
+        attackSpeed = 1 + ( (float)stats.Speed - avgSpeed) / avgSpeed;
     }
 
     // Update is called once per frame

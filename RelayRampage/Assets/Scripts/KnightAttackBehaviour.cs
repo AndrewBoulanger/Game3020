@@ -9,7 +9,7 @@ public class KnightAttackBehaviour : PlayerAttackBehaviour
     {
         if(context.started)
         { 
-            Debug.Log("attacked");
+            anim.SetTrigger("attackb");
         }
     }
 
@@ -17,7 +17,8 @@ public class KnightAttackBehaviour : PlayerAttackBehaviour
     {
         if (context.started)
         {
-            Debug.Log("defend");
+            anim.SetFloat("AttackSpeed", attackSpeed);
+            anim.SetBool("Defending", true);
             OnTurnEnd(false);
         }
     }

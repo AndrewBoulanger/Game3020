@@ -7,22 +7,36 @@ public class MageAttackBehaviour : PlayerAttackBehaviour
 {
     public override void OnBasicAttack(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+        if (context.started)
+        {
+            anim.SetTrigger("Attack");
+        }
     }
 
     public override void OnDefend(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+        if (context.started)
+        {
+
+            anim.SetBool("Defending", true);
+            OnTurnEnd(false);
+        }
     }
 
     public override void OnSpecial1(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+        if (context.started)
+        {
+            OnTurnEnd(false);
+        }
     }
 
     public override void OnSpecial2(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+        if (context.started)
+        {
+            OnTurnEnd(false);
+        }
     }
 
     // Start is called before the first frame update
