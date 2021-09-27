@@ -14,13 +14,17 @@ public class PlayerMovement : MonoBehaviour
     int moveSpeed;
     Vector2 dir;
 
+    AnimationReceiver anim;
+
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<CharacterStats>();
         moveSpeed = stats.Speed /10;
-        
+
+        anim = GetComponent<AnimationReceiver>();
+      
     }
 
     // Update is called once per frame
@@ -28,12 +32,13 @@ public class PlayerMovement : MonoBehaviour
     {
 
        rigidbody.velocity = new Vector3(moveSpeed * dir.x, rigidbody.velocity.y, moveSpeed * dir.y);
+        
+        anim.SetFloat("moveSpeed", rigidbody.velocity.sqrMagnitude);
     }
 
     public void setVelocity(InputAction.CallbackContext inputs)
     {
         dir = inputs.ReadValue<Vector2>();
-        print(dir);
         if (dir.x > 0)
             transform.rotation = Quaternion.Euler(Vector3.up * 90);
         else if (dir.x < 0)
@@ -50,4 +55,9 @@ public class PlayerMovement : MonoBehaviour
     {
         dir = Vector2.zero;
     }
+    void PlayAnimation(string id, float val)
+    {
+
+    }
+
 }

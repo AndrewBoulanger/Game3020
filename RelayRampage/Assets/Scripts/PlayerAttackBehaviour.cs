@@ -8,10 +8,12 @@ public abstract class PlayerAttackBehaviour : MonoBehaviour
 {
     public TurnOverDelegate OnTurnEnd;
     bool isDead = false;
+
+    TurnIndicatorEffects turnIndicatorCylinder;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+       turnIndicatorCylinder = GetComponentInChildren<TurnIndicatorEffects>();
     }
 
     // Update is called once per frame
@@ -21,6 +23,20 @@ public abstract class PlayerAttackBehaviour : MonoBehaviour
         //if at any point the player is dead, end their turn immediately
         if(isDead)
             OnTurnEnd(true);
+    }
+
+    private void OnEnable()
+    {
+        if( turnIndicatorCylinder != null)
+            turnIndicatorCylinder.gameObject.SetActive(true);
+        else
+            print("cylinder not found");
+    }
+
+    private void OnDisable()
+    {
+        if( turnIndicatorCylinder != null)
+            turnIndicatorCylinder.gameObject.SetActive(false);
     }
 
     public abstract void OnBasicAttack(InputAction.CallbackContext context);
