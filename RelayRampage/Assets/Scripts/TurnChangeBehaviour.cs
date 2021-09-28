@@ -17,6 +17,8 @@ public class TurnChangeBehaviour : MonoBehaviour
     [SerializeField]
     float delayTime = 5f;
 
+    PlayerInput inputs;
+
     /// <summary>
     /// add players to the turn order. get and disable input components, save them to turn back on later
     /// </summary>
@@ -38,6 +40,7 @@ public class TurnChangeBehaviour : MonoBehaviour
     {
         MoveControllers = new List<PlayerMovement>();
         attackControllers = new List<PlayerAttackBehaviour>();
+        inputs = GetComponent<PlayerInput>();
     }
 
     // Start is called before the first frame update
@@ -45,6 +48,9 @@ public class TurnChangeBehaviour : MonoBehaviour
     {
         if(MoveControllers[ activeCharacter] != null)
         toggleActive(activeCharacter, true);
+
+        //dont start with input enabled to avoid carrying over input when loading
+        inputs.enabled = true;
     }
 
     private void Update()
@@ -86,11 +92,13 @@ public class TurnChangeBehaviour : MonoBehaviour
 
     public void OnMoveInput(InputAction.CallbackContext context)
     {
+       // print(activeCharacter);
         MoveControllers[activeCharacter].setVelocity(context);
     }
     public void OnBasicAttackInput(InputAction.CallbackContext context)
     {
-        attackControllers[activeCharacter].OnBasicAttack(context);
+        if(attackControllers[activeCharacter] != null ) 
+            attackControllers[activeCharacter].OnBasicAttack(context);
     }
 
     public void OnDefendInput(InputAction.CallbackContext context)

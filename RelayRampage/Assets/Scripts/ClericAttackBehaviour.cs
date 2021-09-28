@@ -7,8 +7,10 @@ public class ClericAttackBehaviour : PlayerAttackBehaviour
 {
     public override void OnBasicAttack(InputAction.CallbackContext context)
     {
-        if(context.started)
+        if(context.started && inputDelayTimer <= 0)
         {
+            inputDelayTimer = inputDelay;
+            anim.SetFloat("AttackSpeed", attackSpeed);
             anim.SetTrigger("Attack");
         }
     }
@@ -17,6 +19,7 @@ public class ClericAttackBehaviour : PlayerAttackBehaviour
     {
         if(context.started)
         {
+            defending = true;
             anim.SetBool("Defending", true);
             //enable shield object when added
             OnTurnEnd(false);
@@ -40,15 +43,5 @@ public class ClericAttackBehaviour : PlayerAttackBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

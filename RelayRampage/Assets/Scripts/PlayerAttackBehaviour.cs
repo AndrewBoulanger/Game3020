@@ -14,6 +14,11 @@ public abstract class PlayerAttackBehaviour : MonoBehaviour
     protected CharacterStats stats;
     protected float attackSpeed;
 
+    protected bool defending;
+
+    protected float inputDelay = 0.95f;
+    protected float inputDelayTimer = 0;
+
     TurnIndicatorEffects turnIndicatorCylinder;
     // Start is called before the first frame update
     void Awake()
@@ -22,11 +27,15 @@ public abstract class PlayerAttackBehaviour : MonoBehaviour
         anim = GetComponent<AnimationReceiver>();
         stats = GetComponent<CharacterStats>();
         attackSpeed = 1 + ( (float)stats.Speed - avgSpeed) / avgSpeed;
+       inputDelay *= 1/attackSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //delay timer set in the overloaded basic attack function, prevents input spaming
+        if(inputDelayTimer >= 0)
+            inputDelayTimer -= Time.deltaTime;
 
         //if at any point the player is dead, end their turn immediately
         if(isDead)
@@ -39,6 +48,13 @@ public abstract class PlayerAttackBehaviour : MonoBehaviour
             turnIndicatorCylinder.gameObject.SetActive(true);
         else
             print("cylinder not found");
+
+        if(defending)
+        {
+            defending = false;
+            anim.SetBool("Defending", false);
+        }
+        
     }
 
     private void OnDisable()

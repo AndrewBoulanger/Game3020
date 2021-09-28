@@ -7,8 +7,10 @@ public class ThiefAttackBehaviour : PlayerAttackBehaviour
 {
     public override void OnBasicAttack(InputAction.CallbackContext context)
     {
-        if(context.started)
-        { 
+        if(context.started && inputDelayTimer <= 0)
+        {
+            inputDelayTimer = inputDelay;
+            anim.SetFloat("AttackSpeed", attackSpeed);
             anim.SetTrigger("attackb");
         }
     }
@@ -17,6 +19,7 @@ public class ThiefAttackBehaviour : PlayerAttackBehaviour
     {
         if(context.started)
         { 
+             defending = true;
             anim.SetBool("Defending", true);
             OnTurnEnd(false);
         }
@@ -38,15 +41,4 @@ public class ThiefAttackBehaviour : PlayerAttackBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

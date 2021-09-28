@@ -7,8 +7,11 @@ public class MageAttackBehaviour : PlayerAttackBehaviour
 {
     public override void OnBasicAttack(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && inputDelayTimer <= 0)
         {
+            inputDelayTimer = inputDelay;
+
+            anim.SetFloat("AttackSpeed", attackSpeed);
             anim.SetTrigger("Attack");
         }
     }
@@ -17,7 +20,7 @@ public class MageAttackBehaviour : PlayerAttackBehaviour
     {
         if (context.started)
         {
-
+            defending = true;
             anim.SetBool("Defending", true);
             OnTurnEnd(false);
         }
@@ -39,16 +42,5 @@ public class MageAttackBehaviour : PlayerAttackBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
 

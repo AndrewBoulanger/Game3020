@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     InputAction.CallbackContext context;
 
     int moveSpeed;
-    Vector2 dir;
+    Vector2 direction;
 
     AnimationReceiver anim;
 
@@ -31,33 +31,36 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
 
-       rigidbody.velocity = new Vector3(moveSpeed * dir.x, rigidbody.velocity.y, moveSpeed * dir.y);
+       rigidbody.velocity = new Vector3(moveSpeed * direction.x, rigidbody.velocity.y, moveSpeed * direction.y);
         
         anim.SetFloat("moveSpeed", rigidbody.velocity.sqrMagnitude);
     }
 
     public void setVelocity(InputAction.CallbackContext inputs)
     {
-        dir = inputs.ReadValue<Vector2>();
-        if (dir.x > 0)
-            transform.rotation = Quaternion.Euler(Vector3.up * 90);
-        else if (dir.x < 0)
-            transform.rotation = Quaternion.Euler(Vector3.down * 90);
-       
+        setDirection(inputs.ReadValue<Vector2>());
         context = inputs;
     }
     private void OnEnable()
     {
-        dir = context.ReadValue<Vector2>();
+       setDirection(context.ReadValue<Vector2>());
     }
 
     private void OnDisable()
     {
-        dir = Vector2.zero;
+        direction = Vector2.zero;
     }
     void PlayAnimation(string id, float val)
     {
 
+    }
+    private void setDirection(Vector2 dir)
+    {
+        direction = dir;
+        if (direction.x > 0)
+            transform.rotation = Quaternion.Euler(Vector3.up * 90);
+        else if (direction.x < 0)
+            transform.rotation = Quaternion.Euler(Vector3.down * 90);
     }
 
 }

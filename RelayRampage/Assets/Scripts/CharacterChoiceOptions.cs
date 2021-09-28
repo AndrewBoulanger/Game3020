@@ -103,11 +103,12 @@ public class CharacterChoiceOptions : MonoBehaviour
         if(confirmed)
         {
            using (StreamWriter sw = new StreamWriter(Application.dataPath + Path.DirectorySeparatorChar + "PartySaveData.txt"))
-            foreach(GameObject partyMember in chosenCharacters)
             {
-              partyMember.GetComponent<CharacterStats>().saveData(sw);
+                foreach (GameObject partyMember in chosenCharacters)
+                {
+                    partyMember.GetComponent<CharacterStats>().saveData(sw);
+                }
             }
-           
             SceneManager.LoadScene("BattleScene");
         }
         else
