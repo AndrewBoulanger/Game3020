@@ -49,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnDisable()
     {
         direction = Vector2.zero;
+        anim.SetFloat("moveSpeed", 0f);
     }
     void PlayAnimation(string id, float val)
     {
