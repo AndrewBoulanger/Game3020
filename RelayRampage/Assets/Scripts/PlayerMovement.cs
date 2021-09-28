@@ -16,14 +16,17 @@ public class PlayerMovement : MonoBehaviour
 
     AnimationReceiver anim;
 
+    private void Awake()
+    {
+        anim = GetComponent<AnimationReceiver>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<CharacterStats>();
         moveSpeed = stats.Speed /10;
-
-        anim = GetComponent<AnimationReceiver>();
       
     }
 
@@ -49,7 +52,8 @@ public class PlayerMovement : MonoBehaviour
     private void OnDisable()
     {
         direction = Vector2.zero;
-        anim.SetFloat("moveSpeed", 0f);
+        if(anim != null)
+            anim.SetFloat("moveSpeed", 0f);
     }
     void PlayAnimation(string id, float val)
     {

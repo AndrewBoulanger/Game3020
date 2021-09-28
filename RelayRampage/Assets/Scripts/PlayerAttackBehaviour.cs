@@ -21,7 +21,7 @@ public abstract class PlayerAttackBehaviour : MonoBehaviour
 
     TurnIndicatorEffects turnIndicatorCylinder;
     // Start is called before the first frame update
-    void Awake()
+    protected virtual void Awake()
     {
        turnIndicatorCylinder = GetComponentInChildren<TurnIndicatorEffects>();
         anim = GetComponent<AnimationReceiver>();
@@ -42,7 +42,7 @@ public abstract class PlayerAttackBehaviour : MonoBehaviour
             OnTurnEnd(true);
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         if( turnIndicatorCylinder != null)
             turnIndicatorCylinder.gameObject.SetActive(true);

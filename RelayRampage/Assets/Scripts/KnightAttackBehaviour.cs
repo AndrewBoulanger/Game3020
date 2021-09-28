@@ -5,6 +5,20 @@ using UnityEngine.InputSystem;
 
 public class KnightAttackBehaviour : PlayerAttackBehaviour
 {
+    attackCollider collider;
+
+    [SerializeField]
+    float impulseStrength = 20f;
+    [SerializeField]
+    float spcDmgMod = 1.5f;
+
+    protected override void Awake() 
+    {
+        base.Awake();
+        collider = GetComponentInChildren<attackCollider>();
+
+    }
+
     public override void OnBasicAttack(InputAction.CallbackContext context)
     {
         if(context.started && inputDelayTimer <= 0)
@@ -12,7 +26,8 @@ public class KnightAttackBehaviour : PlayerAttackBehaviour
             inputDelayTimer = inputDelay;
 
             anim.SetFloat("AttackSpeed", attackSpeed);
-            anim.SetTrigger("attackb");
+            anim.SetTrigger("Attack");
+            collider.EnableCollider(inputDelay, stats.Strength);
         }
     }
 
@@ -30,6 +45,13 @@ public class KnightAttackBehaviour : PlayerAttackBehaviour
     {
         if (context.started)
         {
+            Vector2 playerLoc = new Vector2(transform.position.x, transform.position.z);
+            collider.AddImpulse(impulseStrength, playerLoc);
+            collider.EnableCollider(inputDelay, stats.Strength * spcDmgMod);
+
+            anim.SetFloat("AttackSpeed", attackSpeed);
+            anim.SetTrigger("attackb");
+
             OnTurnEnd(false);
         }
     }
