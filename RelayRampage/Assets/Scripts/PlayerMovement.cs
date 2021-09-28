@@ -55,10 +55,7 @@ public class PlayerMovement : MonoBehaviour
         if(anim != null)
             anim.SetFloat("moveSpeed", 0f);
     }
-    void PlayAnimation(string id, float val)
-    {
 
-    }
     private void setDirection(Vector2 dir)
     {
         direction = dir;

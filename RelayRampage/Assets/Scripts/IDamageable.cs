@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public delegate void AttackEffectDelegate();
+public delegate void AttackEffectDelegate(IDamageable objectBeingHit);
 public interface IDamageable 
 {
 
@@ -13,10 +13,10 @@ public interface IDamageable
 
     //effect functions
 
-    public void LaunchUp();
-     public void BurnStatus();
-    public void FrozenStatus();
-    public void StunnedStatus();
+    public void LaunchUp(IDamageable objectBeingHit);
+     public void BurnStatus(IDamageable objectBeingHit);
+    public void FrozenStatus(IDamageable objectBeingHit);
+    public void StunnedStatus(IDamageable objectBeingHit);
 
 
 }

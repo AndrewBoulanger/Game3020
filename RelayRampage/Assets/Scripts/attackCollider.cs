@@ -74,10 +74,11 @@ public class attackCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
+        print("collider hit something");
         IDamageable damageable = other.gameObject.GetComponent<IDamageable>();
         if (damageable != null)
         {
+            print("collider hit a damageable");
             //send damage info
             damageable.TakeDamage(strength);
 

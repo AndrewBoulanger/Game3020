@@ -2,16 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TreasureChest : MonoBehaviour, IDamageable
+
+
+public class TrainingDummyBehaviour : MonoBehaviour, IDamageable
 {
+    int maxHealth = 300;
+    int health = 1000;
+    float defence = 80;
+    const int AvgDefence = 65;
+    float weight = 40;
+    const int AvgWeight = 65;
+
+    Rigidbody rb;
+
     public void AddDamageEffects(List<AttackEffectDelegate> effects)
     {
-        throw new System.NotImplementedException();
+        foreach(AttackEffectDelegate callEffect in effects)
+        {
+            callEffect(this); 
+        }
     }
 
     public void AddImpulse(Vector2 impulse)
     {
-        throw new System.NotImplementedException();
+
+        rb.AddForce(impulse);
     }
 
     public void BurnStatus(IDamageable objectBeingHit)
@@ -36,13 +51,16 @@ public class TreasureChest : MonoBehaviour, IDamageable
 
     public void TakeDamage(float strength)
     {
-        throw new System.NotImplementedException();
+        int damage = (int)(strength * (AvgDefence / defence));
+        health -= damage;
+        print(health);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
+        rb.mass = weight;
     }
 
     // Update is called once per frame
