@@ -34,7 +34,7 @@ public class TreasureChest : MonoBehaviour, IDamageable
         throw new System.NotImplementedException();
     }
 
-    public void TakeDamage(float strength)
+    public void TakeDamage(float strength, Vector2 vec2)
     {
         throw new System.NotImplementedException();
     }

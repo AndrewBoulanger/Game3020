@@ -7,7 +7,7 @@ public interface IDamageable
 {
 
     public void AddDamageEffects(List<AttackEffectDelegate> effects);
-    public void TakeDamage(float strength);
+    public void TakeDamage(float strength, Vector2 attackDir);
     //pass this one via the collider, since we need to figure out a direction to knock them
     public void AddImpulse(Vector2 impulse);
 

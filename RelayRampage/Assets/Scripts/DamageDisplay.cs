@@ -12,12 +12,14 @@ public class DamageDisplay : MonoBehaviour
     const float fadeTime = 1.5f;
     float timer;
     Color textColor;
+    Vector3 Pos;
 
     // Start is called before the first frame update
     void Start()
     {
         text = GetComponent<TextMeshProUGUI>();
         textColor.r = 1;
+        Pos = transform.localPosition;
     }
     private void Update()
     {
@@ -33,6 +35,7 @@ public class DamageDisplay : MonoBehaviour
 
     public void SetDamage(int damage)
     {
+        transform.localPosition = new Vector3(Pos.x + Random.Range(0f,1.1f), Pos.y + Random.Range(0f,1.1f));
         text.enabled = true;
         text.SetText(damage.ToString());
         timer = fadeTime;

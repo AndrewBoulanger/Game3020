@@ -26,7 +26,6 @@ public class TrainingDummyBehaviour : MonoBehaviour, IDamageable
 
     public void AddImpulse(Vector2 impulse)
     {
-        print(impulse);
         rb.AddForce(impulse, ForceMode.VelocityChange);
     }
 
@@ -50,7 +49,7 @@ public class TrainingDummyBehaviour : MonoBehaviour, IDamageable
         throw new System.NotImplementedException();
     }
 
-    public void TakeDamage(float strength)
+    public void TakeDamage(float strength, Vector2 impulse)
     {
         int damage = (int)(strength * (AvgDefence / defence));
         health -= damage;
@@ -59,6 +58,7 @@ public class TrainingDummyBehaviour : MonoBehaviour, IDamageable
             display.gameObject.SetActive(true);
             display.SetDamage(damage);
         }
+        rb.AddForce(damage * impulse.normalized, ForceMode.Impulse);
     }
 
     // Start is called before the first frame update
@@ -67,6 +67,7 @@ public class TrainingDummyBehaviour : MonoBehaviour, IDamageable
         rb = GetComponent<Rigidbody>();
         rb.mass = weight;
         display = GetComponentInChildren<DamageDisplay>();
+
     }
 
     // Update is called once per frame

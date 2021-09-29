@@ -15,6 +15,7 @@ public class attackCollider : MonoBehaviour
     float impulseForce;
     Vector2 impulseOrigin;
     
+    Transform ownertransform;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,9 @@ public class attackCollider : MonoBehaviour
         collider.enabled = false;
         activeEffects = new List<AttackEffectDelegate>();
         activeEffects.Capacity = 5;
+        ownertransform = transform.parent;
+        if(ownertransform == null)
+            ownertransform = transform;
     }
 
     // Update is called once per frame
@@ -38,14 +42,13 @@ public class attackCollider : MonoBehaviour
         else
         {
             collider.enabled = false;
+            resetValues();
         }
     }
 
     /// <summary>
     /// enable collider with attacker's strength and the duration of animation. call after impulse and add effect
     /// </summary>
-    /// <param name="duration"></param>
-    /// <param name="strength"></param>
     public void SetColliderValues(float duration, float strength, float start = 0)
     {
         this.strength = strength;
@@ -53,15 +56,16 @@ public class attackCollider : MonoBehaviour
         startOffset = start;
         timer = 0;
     }
+
     /// <summary>
     /// passing Idamageable Functions to an Idamagable class in the hopes that they call it on themselves. I hope this works. 
     /// see Idamageable class for available functions, the individual IDamage classes will each have their own implementation
-    /// </summary>
-    /// <param name="effect"></param>
     public void addDamageEffect(AttackEffectDelegate effect)
     {
         activeEffects.Add(effect);
     }
+
+
     /// <summary>
     /// pass vector2.zero to use the collider's position, instead of the players
     /// </summary>
@@ -83,8 +87,11 @@ public class attackCollider : MonoBehaviour
         IDamageable damageable = other.gameObject.GetComponent<IDamageable>();
         if (damageable != null)
         {
+            //used to nudge the enemy with out grabbing exact locations
+            Vector2 attackDir = (other.transform.position.x <= ownertransform.position.x) ? Vector2.left : Vector2.right;
+
             //send damage info
-            damageable.TakeDamage(strength);
+            damageable.TakeDamage(strength, attackDir);
 
             //possibly send impulse info
             if(impulseForce != 0)
