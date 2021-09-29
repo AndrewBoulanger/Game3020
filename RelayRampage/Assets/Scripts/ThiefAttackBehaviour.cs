@@ -5,13 +5,28 @@ using UnityEngine.InputSystem;
 
 public class ThiefAttackBehaviour : PlayerAttackBehaviour
 {
+    attackCollider collider;
+
+    [SerializeField]
+    float impulseStrength = 50f;
+    [SerializeField]
+    float bscDmgMod = 0.5f;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        collider = GetComponentInChildren<attackCollider>();
+
+    }
     public override void OnBasicAttack(InputAction.CallbackContext context)
     {
         if(context.started && inputDelayTimer <= 0)
         {
             inputDelayTimer = inputDelay;
+
             anim.SetFloat("AttackSpeed", attackSpeed);
             anim.SetTrigger("attackb");
+            collider.SetColliderValues(inputDelay, stats.Strength * bscDmgMod, inputDelay * colliderDelay);
         }
     }
 

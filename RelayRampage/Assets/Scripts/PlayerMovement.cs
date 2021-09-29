@@ -14,11 +14,11 @@ public class PlayerMovement : MonoBehaviour
     int moveSpeed;
     Vector2 direction;
 
-    AnimationReceiver anim;
+    Animator anim;
 
     private void Awake()
     {
-        anim = GetComponent<AnimationReceiver>();
+        anim = GetComponent<Animator>();
     }
 
     // Start is called before the first frame update

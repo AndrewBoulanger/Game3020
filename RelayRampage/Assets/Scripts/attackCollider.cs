@@ -7,7 +7,9 @@ public class attackCollider : MonoBehaviour
 {
     Collider collider;
 
+    float startOffset;
     float activeDuration;
+    float timer;
     float strength;
     List<AttackEffectDelegate> activeEffects;
     float impulseForce;
@@ -26,9 +28,12 @@ public class attackCollider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(activeDuration >= 0)
+        if(timer < activeDuration)
         {
-            activeDuration -= Time.deltaTime;
+            timer += Time.deltaTime;
+
+            if(timer > startOffset)
+                collider.enabled = true;
         }
         else
         {
@@ -37,15 +42,16 @@ public class attackCollider : MonoBehaviour
     }
 
     /// <summary>
-    /// enable collider with attacker's strength and the duration of animation
+    /// enable collider with attacker's strength and the duration of animation. call after impulse and add effect
     /// </summary>
     /// <param name="duration"></param>
     /// <param name="strength"></param>
-    public void EnableCollider(float duration, float strength)
+    public void SetColliderValues(float duration, float strength, float start = 0)
     {
-        collider.enabled = true;
         this.strength = strength;
         activeDuration = duration;
+        startOffset = start;
+        timer = 0;
     }
     /// <summary>
     /// passing Idamageable Functions to an Idamagable class in the hopes that they call it on themselves. I hope this works. 
@@ -74,11 +80,9 @@ public class attackCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print("collider hit something");
         IDamageable damageable = other.gameObject.GetComponent<IDamageable>();
         if (damageable != null)
         {
-            print("collider hit a damageable");
             //send damage info
             damageable.TakeDamage(strength);
 
@@ -86,7 +90,7 @@ public class attackCollider : MonoBehaviour
             if(impulseForce != 0)
             {
                 Vector2 otherPos = new Vector2(other.transform.position.x, other.transform.position.z);
-                damageable.AddImpulse((otherPos - impulseOrigin) * impulseForce); 
+                damageable.AddImpulse((otherPos - impulseOrigin).normalized * impulseForce); 
             }
 
            //possibly send other damage effect info
@@ -98,9 +102,19 @@ public class attackCollider : MonoBehaviour
 
     }
 
+    private void resetValues()
+    {
+        impulseForce = 0;
+
+        if (activeEffects != null)
+        {
+            activeEffects.Clear();
+        }
+    }
+
     private void OnDisable()
     {
-        activeEffects.Clear();
-        impulseForce = 0;
+        resetValues();
     }
+
 }

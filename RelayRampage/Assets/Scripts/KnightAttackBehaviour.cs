@@ -8,9 +8,9 @@ public class KnightAttackBehaviour : PlayerAttackBehaviour
     attackCollider collider;
 
     [SerializeField]
-    float impulseStrength = 20f;
+    float impulseStrength = 50f;
     [SerializeField]
-    float spcDmgMod = 1.5f;
+    float bscDmgMod = 0.5f;
 
     protected override void Awake() 
     {
@@ -27,7 +27,7 @@ public class KnightAttackBehaviour : PlayerAttackBehaviour
 
             anim.SetFloat("AttackSpeed", attackSpeed);
             anim.SetTrigger("Attack");
-            collider.EnableCollider(inputDelay, stats.Strength);
+            collider.SetColliderValues(inputDelay, stats.Strength * bscDmgMod, colliderDelay);
         }
     }
 
@@ -47,7 +47,7 @@ public class KnightAttackBehaviour : PlayerAttackBehaviour
         {
             Vector2 playerLoc = new Vector2(transform.position.x, transform.position.z);
             collider.AddImpulse(impulseStrength, playerLoc);
-            collider.EnableCollider(inputDelay, stats.Strength * spcDmgMod);
+            collider.SetColliderValues(inputDelay, stats.Strength , colliderDelay);
 
             anim.SetFloat("AttackSpeed", attackSpeed);
             anim.SetTrigger("attackb");
@@ -63,5 +63,7 @@ public class KnightAttackBehaviour : PlayerAttackBehaviour
             OnTurnEnd(false);
         }
     }
+
+
 
 }

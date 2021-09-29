@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 5db0dfad45d3c8a4da1344df5e4f5cab
 ModelImporter:
-  serializedVersion: 20101
+  serializedVersion: 21100
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
@@ -41,8 +41,8 @@ ModelImporter:
       name: attack_A
       takeName: mixamo.com
       internalID: 0
-      firstFrame: 0
-      lastFrame: 61
+      firstFrame: 23
+      lastFrame: 44
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -486,6 +486,7 @@ ModelImporter:
   animationType: 3
   humanoidOversampling: 1
   avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
   additionalBone: 0
   userData: 
   assetBundleName: 

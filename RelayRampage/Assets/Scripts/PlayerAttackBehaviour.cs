@@ -6,17 +6,19 @@ using UnityEngine.InputSystem;
 public delegate void TurnOverDelegate(bool isDead);
 public abstract class PlayerAttackBehaviour : MonoBehaviour
 {
-    protected AnimationReceiver anim;
+    protected Animator anim;
     public TurnOverDelegate OnTurnEnd;
     bool isDead = false;
     const float avgSpeed = 65f;
 
+
     protected CharacterStats stats;
     protected float attackSpeed;
+    protected float colliderDelay = 0.4f;
 
     protected bool defending;
 
-    protected float inputDelay = 0.95f;
+    protected float inputDelay = 0.70f;
     protected float inputDelayTimer = 0;
 
     TurnIndicatorEffects turnIndicatorCylinder;
@@ -24,16 +26,17 @@ public abstract class PlayerAttackBehaviour : MonoBehaviour
     protected virtual void Awake()
     {
        turnIndicatorCylinder = GetComponentInChildren<TurnIndicatorEffects>();
-        anim = GetComponent<AnimationReceiver>();
+        anim = GetComponent<Animator>();
         stats = GetComponent<CharacterStats>();
         attackSpeed = 1 + ( (float)stats.Speed - avgSpeed) / avgSpeed;
        inputDelay *= 1/attackSpeed;
+        colliderDelay = inputDelay * 0.5f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //delay timer set in the overloaded basic attack function, prevents input spaming
+        //delay timer set in the overloaded basic attack function, prevents input spamming
         if(inputDelayTimer >= 0)
             inputDelayTimer -= Time.deltaTime;
 
