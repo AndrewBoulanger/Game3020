@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TreasureChest : MonoBehaviour, IDamageable
 {
-    public void AddDamageEffects(List<AttackEffectDelegate> effects)
+    public void AddDamageEffects(List<AttackEffect> effects)
     {
         throw new System.NotImplementedException();
     }
@@ -14,22 +14,22 @@ public class TreasureChest : MonoBehaviour, IDamageable
         throw new System.NotImplementedException();
     }
 
-    public void BurnStatus(IDamageable objectBeingHit)
+    public void BurnStatus()
     {
         throw new System.NotImplementedException();
     }
 
-    public void FrozenStatus(IDamageable objectBeingHit)
+    public void FrozenStatus()
     {
         throw new System.NotImplementedException();
     }
 
-    public void LaunchUp(IDamageable objectBeingHit)
+    public void LaunchUp()
     {
         throw new System.NotImplementedException();
     }
 
-    public void StunnedStatus(IDamageable objectBeingHit)
+    public void StunnedStatus()
     {
         throw new System.NotImplementedException();
     }

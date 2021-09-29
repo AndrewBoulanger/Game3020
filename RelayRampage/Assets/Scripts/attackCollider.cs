@@ -11,19 +11,23 @@ public class attackCollider : MonoBehaviour
     float activeDuration;
     float timer;
     float strength;
-    List<AttackEffectDelegate> activeEffects;
+    List<AttackEffect> activeEffects;
     float impulseForce;
     Vector2 impulseOrigin;
     
     Transform ownertransform;
+
+    private void Awake()
+    {
+        activeEffects = new List<AttackEffect>();
+        activeEffects.Capacity = 5;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         collider = GetComponent<Collider>();
         collider.enabled = false;
-        activeEffects = new List<AttackEffectDelegate>();
-        activeEffects.Capacity = 5;
         ownertransform = transform.parent;
         if(ownertransform == null)
             ownertransform = transform;
@@ -60,7 +64,7 @@ public class attackCollider : MonoBehaviour
     /// <summary>
     /// passing Idamageable Functions to an Idamagable class in the hopes that they call it on themselves. I hope this works. 
     /// see Idamageable class for available functions, the individual IDamage classes will each have their own implementation
-    public void addDamageEffect(AttackEffectDelegate effect)
+    public void addDamageEffect(AttackEffect effect)
     {
         activeEffects.Add(effect);
     }

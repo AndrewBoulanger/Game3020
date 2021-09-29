@@ -33,7 +33,7 @@ public class KnightAttackBehaviour : PlayerAttackBehaviour
 
     public override void OnDefend(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && inputDelayTimer <= 0)
         {
             defending = true;
             anim.SetBool("Defending", true);
@@ -43,7 +43,7 @@ public class KnightAttackBehaviour : PlayerAttackBehaviour
 
     public override void OnSpecial1(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && inputDelayTimer <= 0)
         {
             Vector2 playerLoc = new Vector2(transform.position.x, transform.position.z);
             collider.AddImpulse(impulseStrength, playerLoc);
@@ -58,7 +58,7 @@ public class KnightAttackBehaviour : PlayerAttackBehaviour
 
     public override void OnSpecial2(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && inputDelayTimer <= 0)
         {
             OnTurnEnd(false);
         }

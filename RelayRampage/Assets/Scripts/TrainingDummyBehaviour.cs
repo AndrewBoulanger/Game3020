@@ -13,14 +13,27 @@ public class TrainingDummyBehaviour : MonoBehaviour, IDamageable
     float weight = 40;
     const int AvgWeight = 20;
 
+    bool isBurning = false;
+    int effectFrameDuration = 1200;
+    int frameCounter = 0;
+    int burnFrequency = 120;
+    int burnDamage = 5;
+
     Rigidbody rb;
     DamageDisplay display;
 
-    public void AddDamageEffects(List<AttackEffectDelegate> effects)
+    public void AddDamageEffects(List<AttackEffect> effects)
     {
-        foreach(AttackEffectDelegate callEffect in effects)
+        foreach(AttackEffect callEffect in effects)
         {
-            callEffect(this); 
+            if(callEffect == AttackEffect.LaunchUp)
+                LaunchUp();
+            else if(callEffect == AttackEffect.Burn)
+                BurnStatus();
+            else if(callEffect == AttackEffect.Freeze)
+                FrozenStatus();
+            else if(callEffect == AttackEffect.Stun)
+                StunnedStatus();
         }
     }
 
@@ -29,22 +42,23 @@ public class TrainingDummyBehaviour : MonoBehaviour, IDamageable
         rb.AddForce(impulse, ForceMode.VelocityChange);
     }
 
-    public void BurnStatus(IDamageable objectBeingHit)
+    public void BurnStatus()
+    {
+        isBurning = true;
+        frameCounter = 0;
+    }
+
+    public void FrozenStatus()
     {
         throw new System.NotImplementedException();
     }
 
-    public void FrozenStatus(IDamageable objectBeingHit)
+    public void LaunchUp()
     {
         throw new System.NotImplementedException();
     }
 
-    public void LaunchUp(IDamageable objectBeingHit)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void StunnedStatus(IDamageable objectBeingHit)
+    public void StunnedStatus()
     {
         throw new System.NotImplementedException();
     }
@@ -71,8 +85,15 @@ public class TrainingDummyBehaviour : MonoBehaviour, IDamageable
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        if(isBurning)
+        {
+            frameCounter++;
+            if(frameCounter % burnFrequency == 0)
+                TakeDamage(burnDamage, Vector2.up);
+            if(frameCounter >= effectFrameDuration)
+                isBurning = false;
+        }
     }
 }
