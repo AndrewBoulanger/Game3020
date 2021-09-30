@@ -28,6 +28,7 @@ public class KnightAttackBehaviour : PlayerAttackBehaviour
             anim.SetFloat("AttackSpeed", attackSpeed);
             anim.SetTrigger("Attack");
             collider.SetColliderValues(inputDelay, stats.Strength * bscDmgMod, colliderDelay);
+            OnTurnEnd(false);
         }
     }
 

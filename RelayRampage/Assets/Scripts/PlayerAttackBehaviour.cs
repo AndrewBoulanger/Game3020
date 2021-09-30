@@ -18,7 +18,7 @@ public abstract class PlayerAttackBehaviour : MonoBehaviour
 
     protected bool defending;
 
-    protected float inputDelay = 0.70f;
+    protected float inputDelay = 0.5f;
     protected float inputDelayTimer = 0;
 
     TurnIndicatorEffects turnIndicatorCylinder;

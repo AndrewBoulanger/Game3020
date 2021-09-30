@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEngine.Assertions;
+using UnityEngine.SceneManagement;
 
 public class BattleSceneManager : MonoBehaviour
 {
@@ -59,5 +60,10 @@ public class BattleSceneManager : MonoBehaviour
                 playerSpawnPoints.RemoveAt(0);
             }
         }
+    }
+
+    public void LoadPreviousScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex-1 );
     }
 }

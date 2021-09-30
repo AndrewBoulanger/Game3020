@@ -11,7 +11,10 @@ public class PlayerMovement : MonoBehaviour
     CharacterStats stats;
     InputAction.CallbackContext context;
 
-    int moveSpeed;
+    Vector3 velocity;
+    float maxAcceleration;
+
+    float moveSpeed;
     Vector2 direction;
 
     Animator anim;
@@ -26,17 +29,29 @@ public class PlayerMovement : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody>();
         stats = GetComponent<CharacterStats>();
-        moveSpeed = stats.Speed /10;
+        moveSpeed = maxAcceleration = (float)stats.Speed * 0.1f;
+
+        velocity = Vector3.zero;
       
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        Vector3 targetVelocity = Vector3.zero;
+        targetVelocity.x = moveSpeed * direction.x;
+        targetVelocity.z = moveSpeed * direction.y;
 
-       rigidbody.velocity = new Vector3(moveSpeed * direction.x, rigidbody.velocity.y, moveSpeed * direction.y);
-        
+        Vector3 velocity = rigidbody.velocity;
+        Vector3 DeltaVelocity = (targetVelocity - velocity);
+        DeltaVelocity.x = Mathf.Clamp(DeltaVelocity.x, -maxAcceleration, maxAcceleration);
+        DeltaVelocity.z = Mathf.Clamp(DeltaVelocity.z, -maxAcceleration, maxAcceleration);
+        DeltaVelocity.y = 0;
+
+        rigidbody.AddForce(DeltaVelocity, ForceMode.VelocityChange);
+       
         anim.SetFloat("moveSpeed", rigidbody.velocity.sqrMagnitude);
+
     }
 
     public void setVelocity(InputAction.CallbackContext inputs)
@@ -52,6 +67,8 @@ public class PlayerMovement : MonoBehaviour
     private void OnDisable()
     {
         direction = Vector2.zero;
+        if(rigidbody != null)
+            rigidbody.velocity = new Vector3(0, velocity.y, 0);
         if(anim != null)
             anim.SetFloat("moveSpeed", 0f);
     }

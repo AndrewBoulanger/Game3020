@@ -28,6 +28,7 @@ public class ClericAttackBehaviour : PlayerAttackBehaviour
             anim.SetTrigger("Attack");
 
             collider.SetColliderValues(inputDelay, stats.Strength * bscDmgMod, colliderDelay);
+            OnTurnEnd(false);
         }
     }
 

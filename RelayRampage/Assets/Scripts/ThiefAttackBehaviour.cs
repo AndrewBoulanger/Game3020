@@ -27,6 +27,7 @@ public class ThiefAttackBehaviour : PlayerAttackBehaviour
             anim.SetFloat("AttackSpeed", attackSpeed);
             anim.SetTrigger("attackb");
             collider.SetColliderValues(inputDelay, stats.Strength * bscDmgMod, inputDelay * colliderDelay);
+            OnTurnEnd(false);
         }
     }
 

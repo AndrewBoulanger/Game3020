@@ -39,6 +39,8 @@ public class MageAttackBehaviour : PlayerAttackBehaviour
                 Vector3 projectileVelocity = (attackSpawn.position - transform.position) * spellSpeed;
                 projectileVelocity.y = 0;
                 projectile.setVelocity(projectileVelocity);
+
+                OnTurnEnd(false);
             }
         }
     }

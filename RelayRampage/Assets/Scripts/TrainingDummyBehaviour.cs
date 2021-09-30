@@ -7,7 +7,7 @@ using UnityEngine;
 public class TrainingDummyBehaviour : MonoBehaviour, IDamageable
 {
     int maxHealth = 300;
-    int health = 1000;
+    int health = 500;
     float defence = 80;
     const int AvgDefence = 65;
     float weight = 40;
@@ -19,14 +19,21 @@ public class TrainingDummyBehaviour : MonoBehaviour, IDamageable
     int burnFrequency = 120;
     int burnDamage = 5;
 
+    bool isDead;
+
+    [SerializeField]
+    BattleSceneManager sceneManager;
+
     Rigidbody rb;
     DamageDisplay display;
 
+    Animator anim;
+
     public void AddDamageEffects(List<AttackEffect> effects)
     {
-        foreach(AttackEffect callEffect in effects)
+        foreach (AttackEffect callEffect in effects)
         {
-            if(callEffect == AttackEffect.LaunchUp)
+            if (callEffect == AttackEffect.LaunchUp)
                 LaunchUp();
             else if(callEffect == AttackEffect.Burn)
                 BurnStatus();
@@ -73,6 +80,16 @@ public class TrainingDummyBehaviour : MonoBehaviour, IDamageable
             display.SetDamage(damage);
         }
         rb.AddForce(damage * impulse.normalized, ForceMode.Impulse);
+
+        anim.SetTrigger("hit");
+
+        if(health <= 0)
+        {
+            anim.SetBool("dead", true);
+           // rb.constraints = RigidbodyConstraints.None;
+            frameCounter = 0;
+            isDead = true;
+        }
     }
 
     // Start is called before the first frame update
@@ -81,7 +98,7 @@ public class TrainingDummyBehaviour : MonoBehaviour, IDamageable
         rb = GetComponent<Rigidbody>();
         rb.mass = weight;
         display = GetComponentInChildren<DamageDisplay>();
-
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -94,6 +111,24 @@ public class TrainingDummyBehaviour : MonoBehaviour, IDamageable
                 TakeDamage(burnDamage, Vector2.up);
             if(frameCounter >= effectFrameDuration)
                 isBurning = false;
+        }
+        if(isDead)
+        {
+            frameCounter++;
+            if(frameCounter > 260)
+            {
+               sceneManager.LoadPreviousScene();
+            }
+        }
+
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (rb.velocity.sqrMagnitude > 20)
+        {
+
+            TakeDamage(50, Vector3.zero);
         }
     }
 }
